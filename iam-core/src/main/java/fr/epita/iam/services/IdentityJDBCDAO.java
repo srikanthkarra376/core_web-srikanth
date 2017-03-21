@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.epita.iam.datamodel.Identity;
 
 /**
@@ -19,6 +22,8 @@ import fr.epita.iam.datamodel.Identity;
  *
  */
 public class IdentityJDBCDAO {
+	
+	private static final Logger LOGGER = LogManager.getLogger(IdentityJDBCDAO.class);
 
 	private Connection connection;
 
@@ -27,24 +32,34 @@ public class IdentityJDBCDAO {
 	 * 
 	 */
 	public IdentityJDBCDAO() throws SQLException {
+		
 		this.connection = DriverManager.getConnection("jdbc:derby:memory:IAM;create=true", "TOM", "TOM");
-		System.out.println(connection.getSchema());
+		LOGGER.info("connected to this schema:  {}", connection.getSchema());
 	}
 
 	public void writeIdentity(Identity identity) throws SQLException {
+		LOGGER.debug("=> writeIdentity : tracing the input : {}", identity);
+		
 		String insertStatement = "insert into IDENTITIES (IDENTITIES_DISPLAYNAME, IDENTITIES_EMAIL, IDENTITIES_BIRTHDATE) "
 				+ "values(?, ?, ?)";
+		
 		PreparedStatement pstmt_insert = connection.prepareStatement(insertStatement);
 		pstmt_insert.setString(1, identity.getDisplayName());
 		pstmt_insert.setString(2, identity.getEmail());
 		Date now = new Date();
 		pstmt_insert.setDate(3, new java.sql.Date(now.getTime()));
 
+
 		pstmt_insert.execute();
+		LOGGER.debug("<= writeIdentity: leaving the method with no error" );
+		
 
 	}
 
 	public List<Identity> readAll() throws SQLException {
+		LOGGER.debug("=> readAll");
+		
+		
 		List<Identity> identities = new ArrayList<Identity>();
 
 		PreparedStatement pstmt_select = connection.prepareStatement("select * from IDENTITIES");
@@ -57,7 +72,9 @@ public class IdentityJDBCDAO {
 			Identity identity = new Identity(uid, displayName, email);
 			identities.add(identity);
 		}
-		return identities;
+		return LOGGER.traceExit("<= readAll : {}", identities);
+		
+	
 
 	}
 
