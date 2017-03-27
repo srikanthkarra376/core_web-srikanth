@@ -33,7 +33,8 @@ public class IdentityJDBCDAO {
 	 */
 	public IdentityJDBCDAO() throws SQLException {
 		
-		this.connection = DriverManager.getConnection("jdbc:derby:memory:IAM;create=true", "TOM", "TOM");
+		Configuration configuration = Configuration.getInstance();
+		this.connection = DriverManager.getConnection(configuration.getJdbcConnectionString(), configuration.getUser(), configuration.getPwd());
 		LOGGER.info("connected to this schema:  {}", connection.getSchema());
 	}
 
