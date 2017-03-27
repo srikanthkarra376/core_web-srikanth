@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.sql.DataSource;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,18 +28,17 @@ public class IdentityJDBCDAO {
 	
 	private static final Logger LOGGER = LogManager.getLogger(IdentityJDBCDAO.class);
 
+	@Inject
+	@Named("bean name")
 	private DataSource ds;
 
 	/**
 	 * @throws SQLException
 	 * 
 	 */
-	public IdentityJDBCDAO() throws SQLException {
+	private IdentityJDBCDAO() throws SQLException {
 	}
 
-	void setDataSource(DataSource ds){
-		this.ds = ds;
-	}
 
 	public void writeIdentity(Identity identity) throws SQLException {
 		LOGGER.debug("=> writeIdentity : tracing the input : {}", identity);
