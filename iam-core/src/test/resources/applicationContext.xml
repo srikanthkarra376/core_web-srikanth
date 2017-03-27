@@ -4,6 +4,19 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
     
-    <bean name="dao" 
-        class="fr.epita.iam.services.IdentityJDBCDAO" />
+    <bean id="dao" name="dao" 
+        class="fr.epita.iam.services.IdentityJDBCDAO" >
+           <property name="dataSource" ref="dataSourceBean" />
+     </bean>
+        
+     <bean id="dataSourceBean"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
+        <property name="url" value="jdbc:derby:memory:IAM;create=true" />
+        <property name="username" value="TOM" />
+        <property name="password" value="TOM" />
+    </bean>
+        
+        
+        
 </beans>
