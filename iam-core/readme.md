@@ -1,3 +1,7 @@
+# TODO(03/04/2017)
+- try to rebuild the project from scratch
+- document yourself on hibernate, try to setup a testcase to use it in your project.
+
 # TODO(27/03/2017)
 - use the properties placeholder loader to make the test work again :-)
 

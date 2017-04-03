@@ -37,6 +37,8 @@ import fr.epita.iam.services.IdentityJDBCDAO;
 public class TestJDBCDAO {
 	
 	
+	private static boolean initialized = false;
+	
 	@Inject
 	IdentityJDBCDAO dao;
 	
@@ -70,8 +72,10 @@ public class TestJDBCDAO {
 	@Before
 	public void setUp() throws SQLException{
 		LOGGER.info("before test setup");
-	
-		globalSetup(ds);
+		if (! initialized){
+			globalSetup(ds);
+			initialized = true;
+		}
 		
 	}
 	
