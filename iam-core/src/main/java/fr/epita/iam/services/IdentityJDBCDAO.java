@@ -29,7 +29,7 @@ public class IdentityJDBCDAO {
 	private static final Logger LOGGER = LogManager.getLogger(IdentityJDBCDAO.class);
 
 	@Inject
-	@Named("bean name")
+	@Named("dataSourceBean")
 	private DataSource ds;
 
 	/**

@@ -5,6 +5,14 @@
 
 	<bean id="dao" name="dao" class="fr.epita.iam.services.IdentityJDBCDAO" />
 
+	<bean
+	    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	
+	    <property name="location">
+	        <value>test.properties</value>
+	    </property>
+	</bean>
+
     <!-- todo : use SpringPropertiesUtil Something to load the placeholders values below: -->
 	<bean id="dataSourceBean"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
