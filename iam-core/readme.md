@@ -1,3 +1,6 @@
+# TODO(10/04/2017)
+- make a new DAO that uses hibernate as a backend, it should contain the 4 CRUD operations.
+
 # TODO(03/04/2017)
 - try to rebuild the project from scratch
 - document yourself on hibernate, try to setup a testcase to use it in your project.

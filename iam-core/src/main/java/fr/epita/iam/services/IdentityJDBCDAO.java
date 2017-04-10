@@ -75,7 +75,7 @@ public class IdentityJDBCDAO {
 			String displayName = rs.getString("IDENTITIES_DISPLAYNAME");
 			String uid = String.valueOf(rs.getString("IDENTITIES_UID"));
 			String email = rs.getString("IDENTITIES_EMAIL");
-			Date birthDate = rs.getDate("IDENTITIES_BIRTHDATE");
+//			Date birthDate = rs.getDate("IDENTITIES_BIRTHDATE");
 			Identity identity = new Identity(uid, displayName, email);
 			identities.add(identity);
 		}
