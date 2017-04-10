@@ -6,14 +6,15 @@
 	<bean id="dao" name="dao" class="fr.epita.iam.services.IdentityJDBCDAO" />
 
 	<bean
-	    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	
-	    <property name="location">
-	        <value>test.properties</value>
-	    </property>
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+		<property name="location">
+			<value>test.properties</value>
+		</property>
 	</bean>
 
-    <!-- todo : use SpringPropertiesUtil Something to load the placeholders values below: -->
+	<!-- todo : use SpringPropertiesUtil Something to load the placeholders 
+		values below: -->
 	<bean id="dataSourceBean"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driver.name}" />
@@ -21,6 +22,19 @@
 		<property name="username" value="${jdbc.connection.username}" />
 		<property name="password" value="${jdbc.connection.password}" />
 	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceBean" />
+		<property name="packagesToScan=" value="fr.epita.iam.datamodel" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</prop>
+			</props>
+		</property>
+	</bean>
+
+
 
 
 

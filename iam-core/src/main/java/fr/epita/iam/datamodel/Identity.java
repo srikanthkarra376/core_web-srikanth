@@ -3,14 +3,33 @@
  */
 package fr.epita.iam.datamodel;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author tbrou
  *
  */
+@Entity
+@Table(name="IDENTITIES")
 public class Identity {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="IDENTITIES_ID")
+	private long id;
+	
+	@Column(name="IDENTITIES_UID")
 	private String uid;
+	
+	@Column(name="IDENTITIES_DISPLAYNAME")
 	private String displayName;
+	
+	@Column(name="IDENTITIES_EMAIL")
 	private String email;
 	
 	
