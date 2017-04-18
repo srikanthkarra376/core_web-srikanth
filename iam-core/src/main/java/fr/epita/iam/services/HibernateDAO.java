@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import fr.epita.iam.datamodel.Identity;
 
@@ -26,26 +27,35 @@ public class HibernateDAO {
 	
 	public void writeIdentity(Identity identity){
 		Session session = sf.openSession();
+		Transaction transaction = session.beginTransaction();
 		session.save(identity);
+		transaction.commit();
 		session.close();
 	}
 	
 	public void updateIdentity(Identity identity){
 		Session session = sf.openSession();
+		Transaction transaction = session.beginTransaction();
 		session.update(identity);
+		transaction.commit();
 		session.close();
 	}
 	 
 	public void deleteIdentity(Identity identity){
+		
 		Session session = sf.openSession();
+		Transaction transaction = session.beginTransaction();
 		session.delete(identity);
+		transaction.commit();
 		session.close();
 	}
 	
 	public List<Identity> search(Identity identity){
 		Session session = sf.openSession();
-		Query query = session.createQuery("from Identity as identity where identity.displayName like :displayName");
-		query.setParameter("displayName", "%" + identity.getDisplayName() + "%");
+//		String queryString = "from Identity as identity";
+		String queryString = "from Identity as identity where identity.displayName like :displayName";
+		Query query = session.createQuery(queryString);
+		query.setParameter("displayName", "%" + identity.getDisplayName()+"%");
 		List<Identity> identityList = query.list();
 		session.close();
 		return identityList;

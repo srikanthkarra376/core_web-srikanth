@@ -33,6 +33,14 @@ public class Identity {
 	private String email;
 	
 	
+	 /**
+	 * Default constructor
+	 */
+	public Identity() {
+		
+	}
+	
+	
 	/**
 	 * @param uid
 	 * @param displayName
