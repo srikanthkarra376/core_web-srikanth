@@ -90,6 +90,14 @@ public class Identity {
 	public String toString() {
 		return "Identity [uid=" + uid + ", displayName=" + displayName + ", email=" + email + "]";
 	}
+
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
 	
 	
 
