@@ -35,7 +35,7 @@ public class HibernateDAO {
 		session.update(identity);
 		session.close();
 	}
-	
+	 
 	public void deleteIdentity(Identity identity){
 		Session session = sf.openSession();
 		session.delete(identity);
