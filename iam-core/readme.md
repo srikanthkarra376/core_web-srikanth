@@ -1,3 +1,7 @@
+# TODO (24/04/2017)
+- make an Address class (with its Dao) and set a ManyToOne link from address to Identity
+- search an identity from its address.
+
 # TODO(10/04/2017)
 - make a new DAO that uses hibernate as a backend, it should contain the 4 CRUD operations.
 

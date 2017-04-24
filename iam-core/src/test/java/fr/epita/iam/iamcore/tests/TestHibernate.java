@@ -3,15 +3,16 @@
  */
 package fr.epita.iam.iamcore.tests;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.epita.iam.datamodel.Identity;
-import fr.epita.iam.services.IdentityJDBCDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/applicationContext.xml"})
@@ -28,32 +28,34 @@ public class TestHibernate {
 	
 	@Inject
 	SessionFactory sFactory;
-	
-	@Inject
-	IdentityJDBCDAO jdbcDao;
+
 	
 	private static final Logger LOGGER = LogManager.getLogger(TestHibernate.class);
 	
 
 	
 	
+	
+	
 	@Test
-	public void testHibernate() throws SQLException{
+	public void testHQL() {
 		
-		List<Identity> identitiesListFromJdbc = jdbcDao.readAll();
-
-		LOGGER.info("before : {} ", identitiesListFromJdbc);
-		int originalSize = identitiesListFromJdbc.size();
-		
+		//Given
+		String hqlQuery =  "from Identity as identity where identity.displayName = :displayName";
 		Session session = sFactory.openSession();
-		Identity identity = new Identity("654564", "Thomas Broussard", "tbr@tbr.com");
+		Transaction tx = session.beginTransaction();
+		String displayName = "thomas broussard";
+		session.save(new Identity("123", displayName, "tbroussard@natsystem.fr"));
+		tx.commit();
 		
-		session.saveOrUpdate(identity);
+		//When
+		Query query = session.createQuery(hqlQuery);
+		query.setParameter("displayName", displayName);
+		List<Identity> results = query.list();
 		
-		identitiesListFromJdbc = jdbcDao.readAll();
-		LOGGER.info("after : {}", identitiesListFromJdbc);
+		//Then
+		Assert.assertTrue(!results.isEmpty());
 		
-		Assert.assertEquals(jdbcDao.readAll().size(), originalSize + 1);
 		
 	}
 

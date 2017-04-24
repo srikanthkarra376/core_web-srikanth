@@ -18,14 +18,14 @@ import fr.epita.iam.datamodel.Identity;
  * @author tbrou
  *
  */
-public class HibernateDAO {
+public class HibernateDAO implements Dao<Identity>{
 	
 	@Inject
 	SessionFactory sf;
 	
 	
 	
-	public void writeIdentity(Identity identity){
+	public void write(Identity identity){
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.save(identity);
@@ -33,7 +33,7 @@ public class HibernateDAO {
 		session.close();
 	}
 	
-	public void updateIdentity(Identity identity){
+	public void update(Identity identity){
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.update(identity);
@@ -41,7 +41,7 @@ public class HibernateDAO {
 		session.close();
 	}
 	 
-	public void deleteIdentity(Identity identity){
+	public void delete(Identity identity){
 		
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
