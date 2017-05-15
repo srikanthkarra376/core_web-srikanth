@@ -11,6 +11,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import fr.epita.iam.datamodel.Identity;
 
@@ -18,6 +19,8 @@ import fr.epita.iam.datamodel.Identity;
  * @author tbrou
  *
  */
+
+@Repository
 public class HibernateDAO implements Dao<Identity>{
 	
 	@Inject
