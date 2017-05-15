@@ -4,6 +4,8 @@
 package fr.epita.iam.servlets;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,7 +48,11 @@ public class AuthenticationServlet extends HttpServlet{
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 		LOGGER.info("dao instance is : {}", dao);
 		String login = req.getParameter("login");
-		String password = req.getParameter("password");
+		String password = req.getParameter("pwd");
 		LOGGER.info("tried to authenticate with this login {}", login);
+		String[] array = {login,password};
+		List<String> results = Arrays.asList(array);
+		req.getSession().setAttribute("results",results);
+		resp.sendRedirect("results.jsp");
 	}
 }
