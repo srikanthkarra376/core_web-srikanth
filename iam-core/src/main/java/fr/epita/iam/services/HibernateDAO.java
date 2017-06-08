@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import fr.epita.iam.datamodel.Identity;
 
 /**
- * @author tbrou
+ * @author srikanth
  *
  */
 

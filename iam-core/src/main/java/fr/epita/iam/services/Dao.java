@@ -6,7 +6,7 @@ package fr.epita.iam.services;
 import java.util.List;
 
 /**
- * @author tbrou
+ * @author srikanth
  *
  */
 public interface Dao<T> {

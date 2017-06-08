@@ -6,7 +6,7 @@ package fr.epita.iam.services;
 import java.util.Properties;
 
 /**
- * @author tbrou
+ * @author srikanth
  *
  */
 public class Configuration {
@@ -15,8 +15,8 @@ public class Configuration {
 	private static Configuration instance;
 	
 	private String jdbcConnectionString;
-	private String user;
-	private String pwd;
+	private String SRI;
+	private String PASS;
 	
 	private Properties props;
 	
@@ -55,6 +55,14 @@ public class Configuration {
 	 */
 	public String getPwd() {
 		return props.getProperty("jdbc.connection.pwd");
+	}
+
+	public String getSRI() {
+		return SRI;
+	}
+
+	public void setSRI(String sRI) {
+		SRI = sRI;
 	}
 	
 

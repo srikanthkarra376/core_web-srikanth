@@ -13,7 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- * @author tbrou
+ * @author srikanth
  *
  */
 public class WhereClauseBuilder {
